@@ -4,6 +4,8 @@
 #include <string>
 #include <windows.h>
 
+void crearArchivos(int cantidad);
+
 using namespace std;
 
 int main() {
@@ -11,12 +13,17 @@ int main() {
     cout << "Bienvenido al Programa para Calcular la Nota Final de Alumnos" << endl;
     do {
         cout << "Elija una opcion a realizar" << endl;
-        cout << "[1] Crear Archivos con la Notas Finales" << endl;
+        cout << "[1] Crear Archivos con las Notas Finales" << endl;
         cout << "[2] Enlistar Archivos de un Directorio" << endl;
         cout << "[3] Mostrar Detalles de Archivos en un Directorio" << endl;
         cout << "[0] Salir" << endl;
+        cin >> opc;
         switch (opc) {
             case 1:
+                int cantidad;
+                cout << "Ingrese el numero de alumnos del curso" << endl;
+                cin >> cantidad;
+                crearArchivos(cantidad);
                 break;
             case 2:
                 break;
@@ -29,6 +36,35 @@ int main() {
                 cout << "Opcion incorrecta, vuelva a intentarlo" << endl;
                 break;
         }
-    } while (opc != 0);
+    } while (opc == 0);
     return 0;
+}
+
+void crearArchivos(int cantidad){
+    string nombreArchivo = "Nota_Alumno";
+    char nom[150];
+    float notaFinal, n1, n2, n3, n4;
+    float valorPrimerosBimestres = 0.2;
+    float valorUltimoBimestre = 0.4;
+
+    for (int i = 0; i < cantidad; ++i) {
+        ofstream file;
+        file.open("C:/Users/kathe/Desktop/progra/" + nombreArchivo + to_string(i) + ".txt");
+        cout << "\nIngrese el nombre del Alumno: "; cin.ignore(); cin.getline(nom,150);
+        cout << "\nIngrese la Nota del Primer Bimestre: "; cin >> n1;
+        cout << "\nIngrese la Nota del Segundo Bimestre: "; cin >> n2;
+        cout << "\nIngrese la Nota del Tercer Bimestre: "; cin >> n3;
+        cout << "\nIngrese la Nota del Cuarto Bimestre: "; cin >> n4;
+        notaFinal = (n1*valorPrimerosBimestres) + (n2*valorPrimerosBimestres) + (n3*valorPrimerosBimestres) + (n4*valorUltimoBimestre);
+
+        file << "Alumno: " << nom << endl;
+        file << "Nota del Primer Bimestres: " << n1 << " (Equivale al 20% de la Nota Final)" << endl;
+        file << "Nota del Segundo Bimestres: " << n2 << " (Equivale al 20% de la Nota Final)" << endl;
+        file << "Nota del Tercer Bimestres: " << n3 << " (Equivale al 20% de la Nota Final)" << endl;
+        file << "Nota del Cuarto Bimestres: " << n4 << " (Equivale al 40% de la Nota Final)" << endl;
+        file << "Nota Final del Alumno: " << notaFinal << endl;
+        file.close();
+        cout << "------------------------------------------------------------------------" << endl;
+    }
+    cout << cantidad << " Archivos creados con Exito" << endl;
 }
