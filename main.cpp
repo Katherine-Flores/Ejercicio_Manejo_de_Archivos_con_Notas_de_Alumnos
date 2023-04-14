@@ -41,7 +41,7 @@ int main() {
                 cout << "Opcion incorrecta, vuelva a intentarlo" << endl;
                 break;
         }
-    } while (opc == 0);
+    } while (opc != 0);
     return 0;
 }
 
