@@ -5,6 +5,8 @@
 #include <windows.h>
 
 void crearArchivos(int cantidad);
+void listarArchivosDeDirectorio();
+int contarArchivosDeDirectorio();
 
 using namespace std;
 
@@ -26,6 +28,9 @@ int main() {
                 crearArchivos(cantidad);
                 break;
             case 2:
+                cout << "Se encontraron " << contarArchivosDeDirectorio() << " archivos en el Directorio" << endl;
+                cout << "Los Archivos encontrados en el Directorio son los siguierntes:";
+                listarArchivosDeDirectorio();
                 break;
             case 3:
                 break;
@@ -67,4 +72,36 @@ void crearArchivos(int cantidad){
         cout << "------------------------------------------------------------------------" << endl;
     }
     cout << cantidad << " Archivos creados con Exito" << endl;
+}
+
+void listarArchivosDeDirectorio() {
+    WIN32_FIND_DATA findFileData;
+    HANDLE hFind;
+
+    hFind = FindFirstFile("C:/Users/kathe/Desktop/progra/*", &findFileData);
+
+    if (hFind == INVALID_HANDLE_VALUE) {
+        cout << "Ruta Incorrecta" << endl;
+    } else {
+        cout << findFileData.cFileName << endl;
+        while (FindNextFile(hFind, &findFileData) != 0) {
+            cout << findFileData.cFileName << endl;
+        }
+    }
+}
+
+int contarArchivosDeDirectorio(){
+    WIN32_FIND_DATA findFileData;
+    HANDLE          hFind;
+    int cantidadDeArchivos=0;
+    hFind = FindFirstFile("C:/Users/kathe/Desktop/progra/*", &findFileData);
+
+    if (hFind == INVALID_HANDLE_VALUE){
+        cout << "Ruta incorrecta" << endl;
+    }else{
+        while (FindNextFile(hFind, &findFileData)!=0){
+            cantidadDeArchivos=cantidadDeArchivos+1;
+        }
+    }
+    return cantidadDeArchivos-1;
 }
