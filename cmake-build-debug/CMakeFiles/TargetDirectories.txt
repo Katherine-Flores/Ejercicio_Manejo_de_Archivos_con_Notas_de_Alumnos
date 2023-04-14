@@ -1,0 +1,3 @@
+C:/Users/kathe/CLionProjects/EjercicioManejoDeArchivosYDirectorios/cmake-build-debug/CMakeFiles/EjercicioManejoDeArchivosYDirectorios.dir
+C:/Users/kathe/CLionProjects/EjercicioManejoDeArchivosYDirectorios/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/kathe/CLionProjects/EjercicioManejoDeArchivosYDirectorios/cmake-build-debug/CMakeFiles/rebuild_cache.dir
