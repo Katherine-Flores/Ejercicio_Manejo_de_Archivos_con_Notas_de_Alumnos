@@ -7,6 +7,7 @@
 void crearArchivos(int cantidad);
 void listarArchivosDeDirectorio();
 int contarArchivosDeDirectorio();
+void mostrarDetalles();
 
 using namespace std;
 
@@ -14,6 +15,7 @@ int main() {
     int opc;
     cout << "Bienvenido al Programa para Calcular la Nota Final de Alumnos" << endl;
     do {
+        cout << "------------------------------------------------------------------------" << endl;
         cout << "Elija una opcion a realizar" << endl;
         cout << "[1] Crear Archivos con las Notas Finales" << endl;
         cout << "[2] Enlistar Archivos de un Directorio" << endl;
@@ -33,6 +35,7 @@ int main() {
                 listarArchivosDeDirectorio();
                 break;
             case 3:
+                mostrarDetalles();
                 break;
             case 0:
                 cout << "Gracias por Utilizar el Programa" << endl;
@@ -104,4 +107,16 @@ int contarArchivosDeDirectorio(){
         }
     }
     return cantidadDeArchivos-1;
+}
+
+void mostrarDetalles(){
+    filesystem::directory_iterator directoryIterator("C:/Users/kathe/Desktop/progra");
+    for(const auto& entry: directoryIterator){
+        if (!filesystem::is_directory(entry.status())){
+            cout << "------------------------------------------------------------------------" << endl;
+            cout << "Nombre de Archivo: " << entry.path().filename() << endl;
+            cout << "Extension: " << entry.path().extension() << endl;
+            cout << "Peso: " << file_size(entry.path()) << " bytes" << endl;
+        }
+    }
 }
